@@ -3,7 +3,7 @@ import { useState } from 'react';
 // First question details (permanent question)
 const firstQuestion = {
   question: "How many years of experience do you have?",
-  options: ["5 years", "10 years", "15 years", "20 years"],
+  options: ["5-10 years", "10-15 years", "15-20 years", "20+ years"],
 };
 
 // Pool of 20 second questions (randomized HR-related questions)
