@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CheckCircleIcon } from "@heroicons/react/20/solid"; // Import the Heroicons check circle icon
 
 const firstQuestion = {
   questionId: "Q1", // Unique ID for the first question
@@ -360,12 +361,12 @@ function App() {
 
       if (currentQuestionIndex === 0) {
         const randomIndex = Math.floor(Math.random() * secondQuestions.length);
-        setCurrentQuestionIndex(randomIndex + 1); // +1 to skip the first question
+        setCurrentQuestionIndex(randomIndex + 1);
       } else {
         setShowModal(true);
         setTimeout(() => {
           setShowModal(false);
-          setShowIntroModal(true); // Return to the "Yes/No" modal after "Thank You"
+          setShowIntroModal(true);
         }, 3000);
       }
     }, 300);
@@ -392,12 +393,12 @@ function App() {
   const handleIntroResponse = (response) => {
     setShowIntroModal(false);
     if (response === "yes") {
-      setCurrentQuestionIndex(0); // Start the quiz with the first question
+      setCurrentQuestionIndex(0);
     } else {
-      setShowModal(true); // Show the polite thank you modal
+      setShowModal(true);
       setTimeout(() => {
         setShowModal(false);
-        setShowIntroModal(true); // Return to the intro modal after 3 seconds
+        setShowIntroModal(true);
       }, 3000);
     }
   };
@@ -408,11 +409,7 @@ function App() {
       : secondQuestions[currentQuestionIndex - 1];
 
   return (
-    <div
-      className={`min-h-screen flex flex-col items-center justify-center bg-gradient-to-r ${
-        isLoading ? "from-blue-800 to-blue-900" : "from-blue-500 to-blue-600"
-      } relative px-4 sm:px-6 md:px-8`}
-    >
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-[#7091E6] to-[#ede8f5] relative px-4 sm:px-6 md:px-8">
       {/* Event Heading Section */}
       <div className="text-center mb-8">
         <h1 className="text-2xl md:text-3xl font-bold text-white mt-4">
@@ -445,20 +442,21 @@ function App() {
       {/* Intro Modal */}
       {showIntroModal && (
         <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-800 bg-opacity-60 z-50 animate-fade-in">
-          <div className="bg-white p-12 sm:p-16 rounded-2xl shadow-2xl text-center w-full sm:max-w-3xl">
+          <div className="bg-white p-12 sm:p-16 shadow-2xl text-center w-full sm:max-w-3xl">
             <h3 className="text-4xl font-semibold text-gray-800 mb-8 leading-tight">
               Do you have a minute to answer a quick quiz?
             </h3>
+            {/* Buttons */}
             <div className="flex justify-center gap-8">
               <button
                 onClick={() => handleIntroResponse("yes")}
-                className="bg-green-500 text-white text-xl font-semibold py-4 px-10 rounded-full shadow-md transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-300 focus:ring-opacity-50"
+                className="bg-gradient-to-r from-[#ede8f5] to-[#7091E6] text-white text-xl font-semibold py-4 px-10 rounded-full shadow-md transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50"
               >
                 Yes
               </button>
               <button
                 onClick={() => handleIntroResponse("no")}
-                className="bg-red-500 text-white text-xl font-semibold py-4 px-10 rounded-full shadow-md transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-red-300 focus:ring-opacity-50"
+                className="bg-gradient-to-r from-[#ede8f5] to-[#7091E6] text-white text-xl font-semibold py-4 px-10 rounded-full shadow-md transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50"
               >
                 No
               </button>
@@ -493,6 +491,7 @@ function App() {
         </div>
       )}
 
+      {/* Main Question and Options */}
       {!showModal && !showIntroModal && (
         <div className="bg-white p-4 sm:p-6 rounded-xl shadow-2xl w-full max-w-xs md:max-w-2xl mt-6">
           <div className="text-center mb-4">
@@ -506,7 +505,7 @@ function App() {
                 key={option}
                 onClick={() => handleAnswer(option)}
                 disabled={isLoading}
-                className={`w-full py-3 sm:py-4 bg-gradient-to-r from-blue-400 to-blue-500 text-white rounded-lg shadow-md transform hover:scale-105 transition-all duration-300 focus:outline-none flex items-center justify-start ${
+                className={`w-full py-3 sm:py-4 bg-gradient-to-r from-[#adbbda] to-[#8697c4] text-white rounded-lg shadow-md transform hover:scale-105 transition-all duration-300 focus:outline-none flex items-center justify-start ${
                   selectedOption === option ? "border-4 border-yellow-400" : ""
                 }`}
               >
@@ -519,29 +518,18 @@ function App() {
           </div>
         </div>
       )}
+
       {/* Thank You Modal */}
       {showModal && (
         <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-800 bg-opacity-80 z-50 animate-fade-in">
-          <div className="bg-white p-6 sm:p-8 rounded-xl shadow-xl text-center w-full sm:max-w-2xl">
-            {/* Light Green Tint */}
-            <div className="bg-green-50 p-6 rounded-lg mb-4">
-              {/* Image Section */}
-              <div className="flex justify-center mb-4">
-                <img
-                  src="thank.jpg" // Update the path with your image's path in the public folder
-                  alt="Thank You"
-                  className="w-32 h-32 object-cover shadow-lg" // Adjust sizes as needed
-                />
-              </div>
-
-              {/* Thank You Message */}
-              <h3 className="text-2xl font-semibold text-gray-800 mb-2">
-                Thank you for your participation!
-              </h3>
-              <p className="text-lg text-gray-800 mb-4">
-                We appreciate your time and insights.
-              </p>
-            </div>
+          <div className="bg-gradient-to-r from-[#ede8f5] to-[#7091E6] p-12 sm:p-16 rounded-lg shadow-xl text-center w-full sm:max-w-lg">
+            <CheckCircleIcon className="h-16 w-16 text-white mx-auto mb-6" />
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+              Thank you for participating!
+            </h2>
+            <p className="text-white text-lg sm:text-xl">
+              Your response has been recorded successfully.
+            </p>
           </div>
         </div>
       )}
