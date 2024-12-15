@@ -334,43 +334,45 @@ const secondQuestions = [
 ];
 
 function App() {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null); // Track selected option
-  const [showModal, setShowModal] = useState(false); // Show completion modal
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [showIntroModal, setShowIntroModal] = useState(true);
+  const [hasAnswered, setHasAnswered] = useState(false);
 
   const handleAnswer = async (selectedAnswer) => {
-    const currentQuestionData =
-      currentQuestion === 0 ? firstQuestion : secondQuestions[currentQuestion];
+    const currentQuestionData = currentQuestionIndex === 0 ? firstQuestion : secondQuestions[currentQuestionIndex - 1];
 
     setIsLoading(true);
-    setSelectedOption(selectedAnswer); // Set selected option when clicked
+    setSelectedOption(selectedAnswer);
 
     setTimeout(() => {
       setIsLoading(false);
-      setSelectedOption(null); // Reset selected option after delay
+      setSelectedOption(null);
+      setHasAnswered(true);
 
-      if (currentQuestion === 0) {
-        setCurrentQuestion(1); // Move to next question
+      if (currentQuestionIndex === 0) {
+        const randomIndex = Math.floor(Math.random() * secondQuestions.length);
+        setCurrentQuestionIndex(randomIndex + 1); // +1 to skip the first question
       } else {
-        setShowModal(true); // Show completion modal after all questions
+        setShowModal(true);
         setTimeout(() => {
           setShowModal(false);
-          setCurrentQuestion(0); // Reset to first question after modal
+          setShowIntroModal(true); // Return to the "Yes/No" modal after "Thank You"
         }, 3000);
       }
     }, 300);
 
-    const googleSheetUrl =
-      "https://script.google.com/macros/s/AKfycbwnfgBXjKYvRinqN1JUq7QjEN5ieOq55bAbxOuM5kQ_xhbsUFUWMINXrlzHpxW7LyM/exec";
+    const googleSheetUrl = "https://script.google.com/macros/s/AKfycbz6YIHHUd9Als0Bua0DDU07nEf-gdnOHyf84iW5NwORTBhgkQteUdtrNRiKckv2LQ/exec";
 
     try {
       const response = await fetch(googleSheetUrl, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({
-          questionId: currentQuestionData.questionId, // Send questionId
-          answer: selectedAnswer, // Send selected answer
+          questionId: currentQuestionData.questionId,
+          answer: selectedAnswer,
         }),
       });
       const data = await response.json();
@@ -380,16 +382,27 @@ function App() {
     }
   };
 
-  const getQuestion =
-    currentQuestion === 0
-      ? firstQuestion
-      : secondQuestions[Math.floor(Math.random() * secondQuestions.length)];
+  const handleIntroResponse = (response) => {
+    setShowIntroModal(false);
+    if (response === "yes") {
+      setCurrentQuestionIndex(0); // Start the quiz with the first question
+    } else {
+      setShowModal(true); // Show the polite thank you modal
+      setTimeout(() => {
+        setShowModal(false);
+        setShowIntroModal(true); // Return to the intro modal after 3 seconds
+      }, 3000);
+    }
+  };
+
+  const currentQuestionData = currentQuestionIndex === 0 ? firstQuestion : secondQuestions[currentQuestionIndex - 1];
 
   return (
     <div
       className={`min-h-screen flex flex-col items-center justify-center bg-gradient-to-r ${isLoading ? "from-blue-800 to-blue-900" : "from-blue-500 to-blue-600"
-      } relative px-4 sm:px-6 md:px-8`}
+        } relative px-4 sm:px-6 md:px-8`}
     >
+      {/* Event Heading Section */}
       <div className="text-center mb-8">
         <h1 className="text-2xl md:text-3xl font-bold text-white mt-4">
           Synergy Sphere 2024
@@ -402,6 +415,7 @@ function App() {
         </p>
       </div>
 
+      {/* Association Logo Section */}
       <div className="w-full flex justify-center items-center bg-black bg-opacity-0 h-16 mb-4">
         <img
           src="/association.png"
@@ -410,12 +424,37 @@ function App() {
         />
       </div>
 
+      {/* Company Logo Section */}
       <div className="w-full flex items-center justify-between py-2 px-6 md:px-12 absolute top-0 left-0 right-0 z-50">
         <div className="flex items-center">
           <img src="/NewLogo.png" alt="Company Logo" className="w-28 h-auto" />
         </div>
       </div>
 
+      {/* Intro Modal */}
+      {showIntroModal && (
+        <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-800 bg-opacity-80 z-50 animate-fade-in">
+          <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 sm:p-8 rounded-xl shadow-xl text-center w-full sm:max-w-2xl">
+            <h3 className="text-2xl font-semibold text-white mb-2">Do you have a minute to answer a quick quiz?</h3>
+            <div className="space-x-4">
+              <button
+                onClick={() => handleIntroResponse("yes")}
+                className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-md"
+              >
+                Yes
+              </button>
+              <button
+                onClick={() => handleIntroResponse("no")}
+                className="bg-red-500 text-white px-6 py-2 rounded-lg shadow-md"
+              >
+                No
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Loading and Main Content */}
       {isLoading && (
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <svg
@@ -441,15 +480,15 @@ function App() {
         </div>
       )}
 
-      {!showModal && (
+      {!showModal && !showIntroModal && (
         <div className="bg-white p-4 sm:p-6 rounded-xl shadow-2xl w-full max-w-xs md:max-w-2xl mt-6">
           <div className="text-center mb-4">
             <h2 className="text-xl sm:text-2xl font-semibold text-gray-800">
-              {getQuestion.question}
+              {currentQuestionData.question}
             </h2>
           </div>
           <div className="space-y-3">
-            {getQuestion.options.map((option, index) => (
+            {currentQuestionData.options.map((option, index) => (
               <button
                 key={option}
                 onClick={() => handleAnswer(option)}
@@ -458,7 +497,6 @@ function App() {
                   selectedOption === option ? "border-4 border-yellow-400" : ""
                 }`}
               >
-                {/* Square with option letter (A, B, C, D) */}
                 <div className="w-8 h-8 bg-white rounded-full text-center text-gray-700 font-semibold mr-4 mx-2 flex items-center justify-center">
                   {String.fromCharCode(65 + index)} {/* A, B, C, D */}
                 </div>
@@ -469,6 +507,7 @@ function App() {
         </div>
       )}
 
+      {/* Thank You Modal */}
       {showModal && (
         <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-800 bg-opacity-80 z-50 animate-fade-in">
           <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 sm:p-8 rounded-xl shadow-xl text-center w-full sm:max-w-2xl">
@@ -479,24 +518,22 @@ function App() {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke="currentColor"
                 >
                   <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M5 13l4 4L19 7"
+                    fill="currentColor"
+                    d="M13 9l3 3-3 3-3-3 3-3zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"
                   />
                 </svg>
               </div>
             </div>
-            <h3 className="text-2xl sm:text-3xl font-semibold text-white mb-2">
-              Thank You for Your Time!
-            </h3>
-            <p className="text-lg sm:text-xl text-white opacity-80 mb-6">
-              We appreciate your participation. Have a fantastic evening!
-            </p>
-            <div className="flex justify-center"></div>
+            <h3 className="text-2xl font-semibold text-white mb-2">Thank you for your participation!</h3>
+            <p className="text-lg text-white mb-4">We appreciate your time and insights.</p>
+            <button
+              onClick={() => setShowModal(false)}
+              className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-md"
+            >
+              Close
+            </button>
           </div>
         </div>
       )}
