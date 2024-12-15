@@ -1,15 +1,18 @@
 import { useState } from "react";
 
 const firstQuestion = {
-  questionId: "Q1",  // Unique ID for the first question
+  questionId: "Q1", // Unique ID for the first question
   question: "Would you hire a fresher for a critical role in your company?",
-  options: ["Yes, they bring fresh ideas!", "No, we need experience for this role.", "Maybe, but only with proper training."],
+  options: [
+    "Yes, they bring fresh ideas!",
+    "No, we need experience for this role.",
+    "Maybe, but only with proper training.",
+  ],
 };
- 
 
 const secondQuestions = [
   {
-    questionId: "Q2",  // Unique ID for the first question
+    questionId: "Q2", // Unique ID for the first question
     question: "What is the most common reason you hesitate to hire freshers?",
     options: [
       "Lack of practical skills",
@@ -19,7 +22,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q3",  // Unique ID for the first question
+    questionId: "Q3", // Unique ID for the first question
     question: "Which skill do you prioritize most when hiring a fresher?",
     options: [
       "Technical expertise",
@@ -29,7 +32,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q4",  // Unique ID for the first question
+    questionId: "Q4", // Unique ID for the first question
     question:
       "If you had to choose one area for freshers to improve, what would it be?",
     options: [
@@ -40,7 +43,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q5",  // Unique ID for the first question
+    questionId: "Q5", // Unique ID for the first question
     question: "Which training method do you think works best for freshers?",
     options: [
       "Hands-on workshops and projects",
@@ -50,7 +53,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q6",  // Unique ID for the first question
+    questionId: "Q6", // Unique ID for the first question
     question:
       "When hiring freshers, what do you expect their level of preparedness to be?",
     options: [
@@ -61,7 +64,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q7",  // Unique ID for the first question
+    questionId: "Q7", // Unique ID for the first question
     question: "Which soft skill do you find missing most often in freshers?",
     options: [
       "Effective communication",
@@ -71,7 +74,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q8",  // Unique ID for the first question
+    questionId: "Q8", // Unique ID for the first question
     question:
       "What technical skill gap do you observe most in freshers from your domain?",
     options: [
@@ -82,7 +85,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q9",  // Unique ID for the first question
+    questionId: "Q9", // Unique ID for the first question
     question:
       "How do you assess a fresher's ability to fit into your team culture?",
     options: [
@@ -93,7 +96,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q10",  // Unique ID for the first question
+    questionId: "Q10", // Unique ID for the first question
     question:
       "What training technique would you recommend to improve fresher placements?",
     options: [
@@ -104,7 +107,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q11",  // Unique ID for the first question
+    questionId: "Q11", // Unique ID for the first question
     question:
       "What motivates you to prefer freshers over experienced candidates?",
     options: [
@@ -115,7 +118,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q12",  // Unique ID for the first question
+    questionId: "Q12", // Unique ID for the first question
     question:
       "What do you believe is the ideal duration for a training program to prepare freshers for placements?",
     options: [
@@ -126,7 +129,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q13",  // Unique ID for the first question
+    questionId: "Q13", // Unique ID for the first question
     question:
       "How important is certification in influencing your decision to hire a fresher?",
     options: [
@@ -137,7 +140,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q14",  // Unique ID for the first question
+    questionId: "Q14", // Unique ID for the first question
     question:
       "Which area of training do you think is most critical for freshers in your domain?",
     options: [
@@ -148,7 +151,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q15",  // Unique ID for the first question
+    questionId: "Q15", // Unique ID for the first question
     question:
       "How do you rate the importance of fresher placement readiness programs?",
     options: [
@@ -159,7 +162,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q16",  // Unique ID for the first question
+    questionId: "Q16", // Unique ID for the first question
     question:
       "If you could suggest one thing to improve fresher training programs, what would it be?",
     options: [
@@ -170,7 +173,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q17",  // Unique ID for the first question
+    questionId: "Q17", // Unique ID for the first question
     question:
       "Imagine you’re on a hiring spree. Which “superpower” would you want freshers to have?",
     options: [
@@ -181,7 +184,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q18",  // Unique ID for the first question
+    questionId: "Q18", // Unique ID for the first question
     question:
       "If freshers came with a user manual, what would the first page say?",
     options: [
@@ -192,7 +195,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q19",  // Unique ID for the first question
+    questionId: "Q19", // Unique ID for the first question
     question:
       "You’re on a hiring panel for freshers. What’s the first question you’d ask them?",
     options: [
@@ -203,7 +206,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q20",  // Unique ID for the first question
+    questionId: "Q20", // Unique ID for the first question
     question:
       "If a fresher were a movie character, which quality would make them a blockbuster hire?",
     options: [
@@ -214,7 +217,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q21",  // Unique ID for the first question
+    questionId: "Q21", // Unique ID for the first question
     question: "What’s your biggest “wow” moment when interviewing freshers?",
     options: [
       "They share a unique idea or perspective",
@@ -224,7 +227,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q22",  // Unique ID for the first question
+    questionId: "Q22", // Unique ID for the first question
     question:
       "If you had to give a fresher a nickname, what would it be based on their skill gaps?",
     options: [
@@ -235,7 +238,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q23",  // Unique ID for the first question
+    questionId: "Q23", // Unique ID for the first question
     question:
       "Imagine a fresher enters with an empty “skills basket.” What’s the first thing you’d fill it with?",
     options: [
@@ -246,7 +249,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q24",  // Unique ID for the first question
+    questionId: "Q24", // Unique ID for the first question
     question: "What’s your ideal fresher’s learning style?",
     options: [
       "Hands-on, with real-time practice",
@@ -256,7 +259,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q25",  // Unique ID for the first question
+    questionId: "Q25", // Unique ID for the first question
     question:
       "If you were to send one fresher to represent your company at a global event, what quality would you look for?",
     options: [
@@ -267,7 +270,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q26",  // Unique ID for the first question
+    questionId: "Q26", // Unique ID for the first question
     question:
       "What would make you say, “This is the perfect fresher for our team”?",
     options: [
@@ -278,7 +281,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q27",  // Unique ID for the first question
+    questionId: "Q27", // Unique ID for the first question
     question:
       "If you could design a crash course for freshers, what would the first module be?",
     options: [
@@ -289,7 +292,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q28",  // Unique ID for the first question
+    questionId: "Q28", // Unique ID for the first question
     question:
       "Picture this: You hire a fresher today. What’s the one thing they should NOT do on Day 1?",
     options: [
@@ -300,7 +303,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q29",  // Unique ID for the first question
+    questionId: "Q29", // Unique ID for the first question
     question:
       "If a fresher aces one round of an interview, which round do you wish it was?",
     options: [
@@ -311,7 +314,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q30",  // Unique ID for the first question
+    questionId: "Q30", // Unique ID for the first question
     question:
       "If you could give every fresher one piece of advice, what would it be?",
     options: [
@@ -322,7 +325,7 @@ const secondQuestions = [
     ],
   },
   {
-    questionId: "Q31",  // Unique ID for the first question
+    questionId: "Q31", // Unique ID for the first question
     question: "What would make a fresher your dream candidate?",
     options: [
       "Solving a real-world problem in the interview",
@@ -342,7 +345,10 @@ function App() {
   const [hasAnswered, setHasAnswered] = useState(false);
 
   const handleAnswer = async (selectedAnswer) => {
-    const currentQuestionData = currentQuestionIndex === 0 ? firstQuestion : secondQuestions[currentQuestionIndex - 1];
+    const currentQuestionData =
+      currentQuestionIndex === 0
+        ? firstQuestion
+        : secondQuestions[currentQuestionIndex - 1];
 
     setIsLoading(true);
     setSelectedOption(selectedAnswer);
@@ -364,7 +370,8 @@ function App() {
       }
     }, 300);
 
-    const googleSheetUrl = "https://script.google.com/macros/s/AKfycbz6YIHHUd9Als0Bua0DDU07nEf-gdnOHyf84iW5NwORTBhgkQteUdtrNRiKckv2LQ/exec";
+    const googleSheetUrl =
+      "https://script.google.com/macros/s/AKfycbz6YIHHUd9Als0Bua0DDU07nEf-gdnOHyf84iW5NwORTBhgkQteUdtrNRiKckv2LQ/exec";
 
     try {
       const response = await fetch(googleSheetUrl, {
@@ -395,12 +402,16 @@ function App() {
     }
   };
 
-  const currentQuestionData = currentQuestionIndex === 0 ? firstQuestion : secondQuestions[currentQuestionIndex - 1];
+  const currentQuestionData =
+    currentQuestionIndex === 0
+      ? firstQuestion
+      : secondQuestions[currentQuestionIndex - 1];
 
   return (
     <div
-      className={`min-h-screen flex flex-col items-center justify-center bg-gradient-to-r ${isLoading ? "from-blue-800 to-blue-900" : "from-blue-500 to-blue-600"
-        } relative px-4 sm:px-6 md:px-8`}
+      className={`min-h-screen flex flex-col items-center justify-center bg-gradient-to-r ${
+        isLoading ? "from-blue-800 to-blue-900" : "from-blue-500 to-blue-600"
+      } relative px-4 sm:px-6 md:px-8`}
     >
       {/* Event Heading Section */}
       <div className="text-center mb-8">
@@ -433,19 +444,21 @@ function App() {
 
       {/* Intro Modal */}
       {showIntroModal && (
-        <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-800 bg-opacity-80 z-50 animate-fade-in">
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 sm:p-8 rounded-xl shadow-xl text-center w-full sm:max-w-2xl">
-            <h3 className="text-2xl font-semibold text-white mb-2">Do you have a minute to answer a quick quiz?</h3>
-            <div className="space-x-4">
+        <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-800 bg-opacity-60 z-50 animate-fade-in">
+          <div className="bg-white p-12 sm:p-16 rounded-2xl shadow-2xl text-center w-full sm:max-w-3xl">
+            <h3 className="text-4xl font-semibold text-gray-800 mb-8 leading-tight">
+              Do you have a minute to answer a quick quiz?
+            </h3>
+            <div className="flex justify-center gap-8">
               <button
                 onClick={() => handleIntroResponse("yes")}
-                className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-md"
+                className="bg-green-500 text-white text-xl font-semibold py-4 px-10 rounded-full shadow-md transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-green-300 focus:ring-opacity-50"
               >
                 Yes
               </button>
               <button
                 onClick={() => handleIntroResponse("no")}
-                className="bg-red-500 text-white px-6 py-2 rounded-lg shadow-md"
+                className="bg-red-500 text-white text-xl font-semibold py-4 px-10 rounded-full shadow-md transition-all transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-red-300 focus:ring-opacity-50"
               >
                 No
               </button>
@@ -506,34 +519,29 @@ function App() {
           </div>
         </div>
       )}
-
       {/* Thank You Modal */}
       {showModal && (
         <div className="absolute top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-gray-800 bg-opacity-80 z-50 animate-fade-in">
-          <div className="bg-gradient-to-r from-blue-600 to-blue-700 p-6 sm:p-8 rounded-xl shadow-xl text-center w-full sm:max-w-2xl">
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center">
-                <svg
-                  className="w-12 h-12 text-white"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M13 9l3 3-3 3-3-3 3-3zM5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"
-                  />
-                </svg>
+          <div className="bg-white p-6 sm:p-8 rounded-xl shadow-xl text-center w-full sm:max-w-2xl">
+            {/* Light Green Tint */}
+            <div className="bg-green-50 p-6 rounded-lg mb-4">
+              {/* Image Section */}
+              <div className="flex justify-center mb-4">
+                <img
+                  src="thank.jpg" // Update the path with your image's path in the public folder
+                  alt="Thank You"
+                  className="w-32 h-32 object-cover shadow-lg" // Adjust sizes as needed
+                />
               </div>
+
+              {/* Thank You Message */}
+              <h3 className="text-2xl font-semibold text-gray-800 mb-2">
+                Thank you for your participation!
+              </h3>
+              <p className="text-lg text-gray-800 mb-4">
+                We appreciate your time and insights.
+              </p>
             </div>
-            <h3 className="text-2xl font-semibold text-white mb-2">Thank you for your participation!</h3>
-            <p className="text-lg text-white mb-4">We appreciate your time and insights.</p>
-            <button
-              onClick={() => setShowModal(false)}
-              className="bg-green-500 text-white px-6 py-2 rounded-lg shadow-md"
-            >
-              Close
-            </button>
           </div>
         </div>
       )}
