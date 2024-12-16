@@ -412,7 +412,7 @@ function App() {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-[#7091E6] to-[#ede8f5] relative px-4 sm:px-6 md:px-8">
       {/* Event Heading Section */}
       <div className="text-center mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold text-white mt-4">
+        <h1 className="text-2xl md:text-3xl font-bold text-white -mt-20">
           Synergy Sphere 2024
         </h1>
         <p
